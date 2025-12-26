@@ -1,0 +1,50 @@
+# 敏感配置文件
+config.txt
+aliyun_auth.json
+auth.json
+*.auth.json
+
+# 数据文件
+*_aliyun.csv
+*_tencent.csv
+*_aliyun_result.csv
+*_tencent_result.csv
+
+# Python 缓存
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# 日志文件
+logs/
+*.log
+
+# 虚拟环境（如果有）
+venv/
+env/
+ENV/
+.venv
+
+# IDE 配置（可选）
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 操作系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 临时文件
+*.tmp
+*.bak
+*.cache
+
+# 测试文件
+test_*.py
+*_test.py
+

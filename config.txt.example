@@ -1,0 +1,42 @@
+# 配置文件模板
+# 复制此文件为 config.txt 并填入实际配置
+# cp config.txt.example config.txt  (Linux/Mac)
+# copy config.txt.example config.txt  (Windows)
+
+# 阿里云百炼API配置
+api_key=your_api_key_here
+
+# 模型配置
+model=deepseek-v3
+base_url=https://dashscope.aliyuncs.com/compatible-mode/v1
+
+# 请求参数配置
+temperature=0.3
+max_tokens=8192
+timeout=600
+
+# 批量处理配置
+batch_size=400
+random_seed=None
+shuffle=True
+result_per_batch=10
+final_result_count=10
+
+# 邮件发送配置
+email.smtp_server=smtp.163.com
+email.smtp_port=465
+email.use_tls=False  # 使用SSL
+email.sender_email=your_email@example.com
+email.sender_password=your_password_here
+email.sender_name=域名每日推荐
+email.recipient_emails=recipient@example.com
+
+# 爬虫配置
+crawler.slow_mo_min=300
+crawler.slow_mo_max=800
+crawler.page_delay_min=2
+crawler.page_delay_max=4
+crawler.action_delay_min=0.5
+crawler.action_delay_max=1.5
+crawler.auth_state_file=aliyun_auth.json
+
