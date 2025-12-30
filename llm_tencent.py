@@ -655,7 +655,6 @@ def process_domains_batch(date_str: str = None):
     
     # 确定输出文件名
     # 确保logs目录存在
-    import os
     logs_dir = "logs"
     if not os.path.exists(logs_dir):
         os.makedirs(logs_dir)
