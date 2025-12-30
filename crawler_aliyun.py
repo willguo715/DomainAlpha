@@ -174,7 +174,13 @@ def run(playwright: Playwright, date_str: str = None) -> str:
     # 准备 CSV 文件
     if date_str is None:
         date_str = datetime.datetime.now().strftime('%Y-%m-%d')
-    file_name = f"{date_str}_aliyun.csv"
+    
+    # 确保logs目录存在
+    logs_dir = "logs"
+    if not os.path.exists(logs_dir):
+        os.makedirs(logs_dir)
+    
+    file_name = os.path.join(logs_dir, f"{date_str}_aliyun.csv")
     headers = ["序号", "域名", "最低价格", "长度", "注册日期", "预定结束时间"]
     
     index_counter = 1  # 初始化自定义序号

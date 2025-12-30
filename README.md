@@ -16,8 +16,8 @@
 ```
 DomainAlpha/
 ├── main.py                 # 主程序入口
-├── aliyun.py              # 阿里云爬虫
-├── tencent.py             # 腾讯云爬虫
+├── crawler_aliyun.py      # 阿里云爬虫
+├── crawler_tencent.py     # 腾讯云爬虫
 ├── llm_aliyun.py          # 阿里云域名分析
 ├── llm_tencent.py         # 腾讯云域名分析
 ├── domain_processor.py    # 数据处理模块
@@ -81,13 +81,13 @@ python main.py --date 2025-12-26
 
 ```python
 # 只爬取阿里云数据
-python aliyun.py
+python crawler_aliyun.py
 
 # 只分析阿里云域名
 python llm_aliyun.py
 
 # 只爬取腾讯云数据
-python tencent.py
+python crawler_tencent.py
 
 # 只分析腾讯云域名
 python llm_tencent.py
@@ -132,11 +132,13 @@ python scheduler.py
 
 ## 输出文件
 
-- `日期_aliyun.csv` - 阿里云爬取的原始数据
-- `日期_aliyun_result.csv` - 阿里云分析结果
-- `日期_tencent.csv` - 腾讯云爬取的原始数据
-- `日期_tencent_result.csv` - 腾讯云分析结果
-- `logs/` - 执行日志目录
+所有CSV文件都保存在 `logs/` 目录下：
+
+- `logs/日期_aliyun.csv` - 阿里云爬取的原始数据
+- `logs/日期_aliyun_result.csv` - 阿里云分析结果
+- `logs/日期_tencent.csv` - 腾讯云爬取的原始数据
+- `logs/日期_tencent_result.csv` - 腾讯云分析结果
+- `logs/` - 执行日志目录（同时存储CSV文件）
 
 ## 注意事项
 

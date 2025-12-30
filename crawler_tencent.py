@@ -85,7 +85,12 @@ def run(playwright: Playwright, date_str: str = None) -> str:
     else:
         if date_str is None:
             date_str = datetime.datetime.now().strftime('%Y-%m-%d')
-        file_name = f"{date_str}_tencent.csv"
+        # 确保logs目录存在
+        import os
+        logs_dir = "logs"
+        if not os.path.exists(logs_dir):
+            os.makedirs(logs_dir)
+        file_name = os.path.join(logs_dir, f"{date_str}_tencent.csv")
     
     context.close()
     browser.close()
@@ -95,7 +100,14 @@ def run(playwright: Playwright, date_str: str = None) -> str:
 def save_data(data_rows, date_str=None):
     if date_str is None:
         date_str = datetime.datetime.now().strftime('%Y-%m-%d')
-    filename = f'{date_str}_tencent.csv'
+    
+    # 确保logs目录存在
+    import os
+    logs_dir = "logs"
+    if not os.path.exists(logs_dir):
+        os.makedirs(logs_dir)
+    
+    filename = os.path.join(logs_dir, f'{date_str}_tencent.csv')
     with open(filename, 'w', newline='', encoding='utf-8-sig') as f:
         writer = csv.writer(f)
         writer.writerow(['域名', '预订倒计时', '注册时间', '删除时间', '当前人数', '当前价格', '操作'])

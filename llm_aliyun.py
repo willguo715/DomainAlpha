@@ -551,7 +551,14 @@ def process_domains_batch(date_str: str = None):
     # 确定输出文件名
     if date_str is None:
         date_str = datetime.now().strftime('%Y-%m-%d')
-    output_file = f"{date_str}_aliyun_result.csv"
+    
+    # 确保logs目录存在
+    import os
+    logs_dir = "logs"
+    if not os.path.exists(logs_dir):
+        os.makedirs(logs_dir)
+    
+    output_file = os.path.join(logs_dir, f"{date_str}_aliyun_result.csv")
     
     # 格式化汇总数据
     summary_text = format_summary_for_final_selection(all_recommendations)

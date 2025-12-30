@@ -6,6 +6,36 @@ from typing import List, Tuple, Optional, Generator
 
 
 # ==========================================
+# 日志目录管理函数
+# ==========================================
+def get_logs_dir() -> str:
+    """
+    获取logs目录路径，如果不存在则创建
+    
+    Returns:
+        str: logs目录路径
+    """
+    logs_dir = "logs"
+    if not os.path.exists(logs_dir):
+        os.makedirs(logs_dir)
+    return logs_dir
+
+
+def get_csv_path(filename: str) -> str:
+    """
+    获取CSV文件的完整路径（保存在logs目录下）
+    
+    Args:
+        filename: CSV文件名（如 "2025-12-25_aliyun.csv"）
+    
+    Returns:
+        str: CSV文件的完整路径
+    """
+    logs_dir = get_logs_dir()
+    return os.path.join(logs_dir, filename)
+
+
+# ==========================================
 # 配置读取函数
 # ==========================================
 def load_config_key(file_path="config.txt", target_key="api_key", default=None):
@@ -216,19 +246,20 @@ def format_batch_for_model(batch: List[Tuple[str, str]], batch_number: int = Non
 # ==========================================
 def get_csv_filename(date_str: Optional[str] = None) -> str:
     """
-    根据日期生成CSV文件名
+    根据日期生成CSV文件路径（保存在logs目录下）
     
     Args:
         date_str: 日期字符串，格式为 "YYYY-MM-DD"（如 "2025-12-25"）
                  如果为None，使用当前日期
     
     Returns:
-        str: CSV文件名，格式为 "日期_aliyun.csv"
+        str: CSV文件路径，格式为 "logs/日期_aliyun.csv"
     """
     if date_str is None:
         date_str = datetime.now().strftime('%Y-%m-%d')
     
-    return f"{date_str}_aliyun.csv"
+    filename = f"{date_str}_aliyun.csv"
+    return get_csv_path(filename)
 
 
 # ==========================================

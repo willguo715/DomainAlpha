@@ -562,7 +562,10 @@ def process_domains_batch(date_str: str = None):
     # 1. 获取CSV文件名
     if date_str is None:
         date_str = datetime.now().strftime('%Y-%m-%d')
-    csv_file = f"{date_str}_tencent.csv"
+    
+    # CSV文件保存在logs目录下
+    logs_dir = "logs"
+    csv_file = os.path.join(logs_dir, f"{date_str}_tencent.csv")
     
     if not os.path.exists(csv_file):
         raise FileNotFoundError(f"CSV文件不存在: {csv_file}")
@@ -651,7 +654,13 @@ def process_domains_batch(date_str: str = None):
     print("=" * 60)
     
     # 确定输出文件名
-    output_file = f"{date_str}_tencent_result.csv"
+    # 确保logs目录存在
+    import os
+    logs_dir = "logs"
+    if not os.path.exists(logs_dir):
+        os.makedirs(logs_dir)
+    
+    output_file = os.path.join(logs_dir, f"{date_str}_tencent_result.csv")
     
     # 格式化汇总数据
     summary_text = format_summary_for_final_selection(all_recommendations)

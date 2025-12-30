@@ -6,8 +6,8 @@
 """
 import sys
 from datetime import datetime
-from aliyun import run as run_aliyun
-from tencent import run as run_tencent
+from crawler_aliyun import run as run_aliyun
+from crawler_tencent import run as run_tencent
 from playwright.sync_api import sync_playwright
 from llm_aliyun import process_domains_batch as process_aliyun_domains
 from llm_tencent import process_domains_batch as process_tencent_domains
@@ -30,7 +30,12 @@ def step1_crawl_data(date_str: str = None):
     if date_str is None:
         date_str = datetime.now().strftime('%Y-%m-%d')
     
-    csv_file = f"{date_str}_aliyun.csv"
+    import os
+    logs_dir = "logs"
+    if not os.path.exists(logs_dir):
+        os.makedirs(logs_dir)
+    
+    csv_file = os.path.join(logs_dir, f"{date_str}_aliyun.csv")
     
     print("=" * 60)
     print("步骤1: 数据爬取")
@@ -96,7 +101,12 @@ def step3_crawl_tencent_data(date_str: str = None):
     if date_str is None:
         date_str = datetime.now().strftime('%Y-%m-%d')
     
-    csv_file = f"{date_str}_tencent.csv"
+    import os
+    logs_dir = "logs"
+    if not os.path.exists(logs_dir):
+        os.makedirs(logs_dir)
+    
+    csv_file = os.path.join(logs_dir, f"{date_str}_tencent.csv")
     
     print("\n" + "=" * 60)
     print("步骤3: 数据爬取（腾讯云）")
@@ -196,8 +206,10 @@ def main(date_str: str = None):
         print("完整流程执行成功！")
         print("=" * 60)
         print(f"结束时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-        print(f"阿里云结果文件: {date_str}_aliyun_result.csv")
-        print(f"腾讯云结果文件: {date_str}_tencent_result.csv")
+        import os
+        logs_dir = "logs"
+        print(f"阿里云结果文件: {os.path.join(logs_dir, date_str + '_aliyun_result.csv')}")
+        print(f"腾讯云结果文件: {os.path.join(logs_dir, date_str + '_tencent_result.csv')}")
         print("=" * 60)
     
     except KeyboardInterrupt:
